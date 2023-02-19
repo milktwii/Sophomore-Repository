@@ -6,6 +6,8 @@
 ## Actvity Instruction
 
 Create a program that will convert different number systems.  
-Each number system will be converted to a
+Each number system will be converted to a different system.
+- Decimal to Other Number Systems
+- Other Number System
 
-- `src > ListsActivity`: the folder containing the source code
+- `src`: the folder containing the source code
