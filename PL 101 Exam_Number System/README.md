@@ -10,5 +10,5 @@ Each number system will be converted to a different system.
 - Decimal to Other Number Systems
 - Other Number System
 
-- `src > ConversionNumberSystem.java`  
+- `ConversionNumberSystem.java`  
 : the location of the source code
