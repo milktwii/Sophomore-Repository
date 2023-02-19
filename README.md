@@ -1,14 +1,13 @@
-# Sophomore-CS
-*! WORK IN PROGRESS !*  
-**Masterlist** of all Code Files and Programs  
 
-Second Year taking BS in Computer Science  
-At the University of Sto. Tomas-Legazpi
-## First Semester Subjects
-- **CC 104** - Data Structures & Algorithms
-  - Java Programming Only
-- **SDF 104** - Object-Oriented Programming
-  - C# and .NET Programming
-## Second Semester Subjects
-- **PL 101** - Programming Languages
-  - C++ and Java Programming
+# 2nd Year Repository 👋
+
+
+## 🚀 About
+This Repository is dedicated to all the files and programs I have made throughout the two semesters of my Sophomore Year taking BS Computer Science.  
+
+Please check `README.md` per folder to see what the program is about.
+
+## 🛠 Languages Used
+- Java
+- C++
+
