@@ -108,73 +108,75 @@ public class ConversionNumberSystem {
         String inputBinary = scanner.nextLine();
         boolean validation = true;
 
-        for (int loop = 0; loop < inputBinary.length(); loop++) {
-            char character = inputBinary.charAt(loop);
-            if (character != '0'
-                    && character != '1'
-                    && character != '.') {
-                validation = false;
-                break;
-            }
-        }
-
-        int countDot = 0;
-        for (int loop = 0; loop < inputBinary.length(); loop++) {
-            char character = inputBinary.charAt(loop);
-            if (character == '.') {
-                countDot++;
-            }
-        }
-        if (countDot > 1) {
-            validation = false;
-        }
-
-        if (validation) {
-            String[] section = inputBinary.split("\\.");
-            String integralSection = section[0];
-            String fractionalSection = section.length > 1 ? section[1] : "";
-
-            for (int loop = 0; loop < integralSection.length(); loop++) {
-                char character = integralSection.charAt(loop);
-                if (character != '0' && character != '1') {
-                    validation = false;
-                    break;
-                }
-            }
-
-            for (int loop = 0; loop < fractionalSection.length(); loop++) {
-                char character = fractionalSection.charAt(loop);
-                if (character != '0' && character != '1') {
-                    validation = false;
-                    break;
-                }
-            }
-        }
-
-        if (validation) {
-            double decimalValue = convertBinaryToDecimal(inputBinary);
-            String octalValue = convertDecimalToOctal(decimalValue);
-            String hexadecimalValue = convertDecimalToHexadecimal(decimalValue);
-
-            clearScreen();
-            System.out.println();
-            System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
-            System.out.println("VALIDATION SUCCESSFUL...");
-            System.out.println("Current Binary Value: " + inputBinary);
-            displayConversion(inputBinary, octalValue, decimalValue + "", hexadecimalValue);
-            showContinueScreen();
-        }
-
-        else {
-            clearScreen();
-            System.out.println();
-            System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
-            System.out.println(
-                    "! INVALID BINARY NUMBER.\n" +
-                            "     Please enter a VALID Binary Number.\n" +
-                            "     NOTE: Valid Binary Numbers include - 0 and 1.");
-            displayPressContinue();
+        if (inputBinary.isEmpty() || inputBinary.isBlank()) {
             validateBinaryInput();
+        } else {
+            for (int loop = 0; loop < inputBinary.length(); loop++) {
+                char character = inputBinary.charAt(loop);
+                if (character != '0'
+                        && character != '1'
+                        && character != '.') {
+                    validation = false;
+                    break;
+                }
+            }
+
+            int countDot = 0;
+            for (int loop = 0; loop < inputBinary.length(); loop++) {
+                char character = inputBinary.charAt(loop);
+                if (character == '.') {
+                    countDot++;
+                }
+            }
+            if (countDot > 1) {
+                validation = false;
+            }
+
+            if (validation) {
+                String[] section = inputBinary.split("\\.");
+                String integralSection = section[0];
+                String fractionalSection = section.length > 1 ? section[1] : "";
+
+                for (int loop = 0; loop < integralSection.length(); loop++) {
+                    char character = integralSection.charAt(loop);
+                    if (character != '0' && character != '1') {
+                        validation = false;
+                        break;
+                    }
+                }
+
+                for (int loop = 0; loop < fractionalSection.length(); loop++) {
+                    char character = fractionalSection.charAt(loop);
+                    if (character != '0' && character != '1') {
+                        validation = false;
+                        break;
+                    }
+                }
+            }
+
+            if (validation) {
+                double decimalValue = convertBinaryToDecimal(inputBinary);
+                String octalValue = convertDecimalToOctal(decimalValue);
+                String hexadecimalValue = convertDecimalToHexadecimal(decimalValue);
+
+                clearScreen();
+                System.out.println();
+                System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
+                System.out.println("VALIDATION SUCCESSFUL...");
+                System.out.println("Current Binary Value: " + inputBinary);
+                displayConversion(inputBinary, octalValue, decimalValue + "", hexadecimalValue);
+                showContinueScreen();
+            } else {
+                clearScreen();
+                System.out.println();
+                System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
+                System.out.println(
+                        "! INVALID BINARY NUMBER.\n" +
+                                "     Please enter a VALID Binary Number.\n" +
+                                "     NOTE: Valid Binary Numbers include - 0 and 1.");
+                displayPressContinue();
+                validateBinaryInput();
+            }
         }
     }
 
@@ -186,72 +188,75 @@ public class ConversionNumberSystem {
         String octalInput = scanner.nextLine();
         boolean validation = true;
 
-        for (int loop = 0; loop < octalInput.length(); loop++) {
-            char character = octalInput.charAt(loop);
-            if (character != '.' && (character < '0' || character > '7')) {
-                validation = false;
-                break;
-            }
-        }
-
-        int countDot = 0;
-        for (int loop = 0; loop < octalInput.length(); loop++) {
-            char character = octalInput.charAt(loop);
-            if (character == '.') {
-                countDot++;
-            }
-        }
-        if (countDot > 1) {
-            validation = false;
-        }
-
-        if (validation) {
-            String[] section = octalInput.split("\\.");
-            String integralSection = section[0];
-            String fractionalSection = section.length > 1 ? section[1] : "";
-
-            for (int loop = 0; loop < integralSection.length(); loop++) {
-                char character = integralSection.charAt(loop);
-                if (character < '0' || character > '7') {
-                    validation = false;
-                    break;
-                }
-            }
-
-            for (int loop = 0; loop < fractionalSection.length(); loop++) {
-                char character = fractionalSection.charAt(loop);
-                if (character < '0' || character > '7') {
-                    validation = false;
-                    break;
-                }
-            }
-        }
-
-        if (validation) {
-            double decimalValue = convertOctalToDecimal(octalInput);
-            String binaryValue = convertDecimalToBinary(decimalValue);
-            String hexadecimalValue = convertDecimalToHexadecimal(decimalValue);
-
-            clearScreen();
-            System.out.println();
-            System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
-            System.out.println("VALIDATION SUCCESSFUL...");
-            System.out.println("Current Octal Value: " + octalInput);
-            displayConversion(binaryValue, octalInput, decimalValue + "", hexadecimalValue);
-            showContinueScreen();
-        }
-
-        else {
-            clearScreen();
-            System.out.println();
-            System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
-            System.out.println(
-                    "! INVALID OCTAL NUMBER.\n" +
-                            "     Please enter a VALID Octal Number.\n" +
-                            "     NOTE: Valid Octal Numbers include -\n" +
-                            "          0, 1, 2, 3, 4, 5, 6, and 7.");
-            displayPressContinue();
+        if (octalInput.isEmpty() || octalInput.isBlank()) {
             validateOctalInput();
+        } else {
+
+            for (int loop = 0; loop < octalInput.length(); loop++) {
+                char character = octalInput.charAt(loop);
+                if (character != '.' && (character < '0' || character > '7')) {
+                    validation = false;
+                    break;
+                }
+            }
+
+            int countDot = 0;
+            for (int loop = 0; loop < octalInput.length(); loop++) {
+                char character = octalInput.charAt(loop);
+                if (character == '.') {
+                    countDot++;
+                }
+            }
+            if (countDot > 1) {
+                validation = false;
+            }
+
+            if (validation) {
+                String[] section = octalInput.split("\\.");
+                String integralSection = section[0];
+                String fractionalSection = section.length > 1 ? section[1] : "";
+
+                for (int loop = 0; loop < integralSection.length(); loop++) {
+                    char character = integralSection.charAt(loop);
+                    if (character < '0' || character > '7') {
+                        validation = false;
+                        break;
+                    }
+                }
+
+                for (int loop = 0; loop < fractionalSection.length(); loop++) {
+                    char character = fractionalSection.charAt(loop);
+                    if (character < '0' || character > '7') {
+                        validation = false;
+                        break;
+                    }
+                }
+            }
+
+            if (validation) {
+                double decimalValue = convertOctalToDecimal(octalInput);
+                String binaryValue = convertDecimalToBinary(decimalValue);
+                String hexadecimalValue = convertDecimalToHexadecimal(decimalValue);
+
+                clearScreen();
+                System.out.println();
+                System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
+                System.out.println("VALIDATION SUCCESSFUL...");
+                System.out.println("Current Octal Value: " + octalInput);
+                displayConversion(binaryValue, octalInput, decimalValue + "", hexadecimalValue);
+                showContinueScreen();
+            } else {
+                clearScreen();
+                System.out.println();
+                System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
+                System.out.println(
+                        "! INVALID OCTAL NUMBER.\n" +
+                                "     Please enter a VALID Octal Number.\n" +
+                                "     NOTE: Valid Octal Numbers include -\n" +
+                                "          0, 1, 2, 3, 4, 5, 6, and 7.");
+                displayPressContinue();
+                validateOctalInput();
+            }
         }
     }
 
@@ -263,73 +268,76 @@ public class ConversionNumberSystem {
         String decimalInput = scanner.nextLine();
         boolean validation = true;
 
-        for (int loop = 0; loop < decimalInput.length(); loop++) {
-            char character = decimalInput.charAt(loop);
-            if (character != '.' && (character < '0' || character > '9')) {
-                validation = false;
-                break;
-            }
-        }
-
-        int countDot = 0;
-        for (int loop = 0; loop < decimalInput.length(); loop++) {
-            char character = decimalInput.charAt(loop);
-            if (character == '.') {
-                countDot++;
-            }
-        }
-        if (countDot > 1) {
-            validation = false;
-        }
-
-        if (validation) {
-            String[] section = decimalInput.split("\\.");
-            String integralSection = section[0];
-            String fractionalSection = section.length > 1 ? section[1] : "";
-
-            for (int loop = 0; loop < integralSection.length(); loop++) {
-                char character = integralSection.charAt(loop);
-                if (character < '0' || character > '9') {
-                    validation = false;
-                    break;
-                }
-            }
-
-            for (int loop = 0; loop < fractionalSection.length(); loop++) {
-                char character = fractionalSection.charAt(loop);
-                if (character < '0' || character > '9') {
-                    validation = false;
-                    break;
-                }
-            }
-        }
-
-        if (validation) {
-            double decimalValue = Double.parseDouble(decimalInput);
-            String binaryValue = convertDecimalToBinary(decimalValue);
-            String octalValue = convertDecimalToOctal(decimalValue);
-            String hexadecimalValue = convertDecimalToHexadecimal(decimalValue);
-
-            clearScreen();
-            System.out.println();
-            System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
-            System.out.println("VALIDATION SUCCESSFUL...");
-            System.out.println("Current Decimal Value: " + decimalInput);
-            displayConversion(binaryValue, octalValue, decimalValue + "", hexadecimalValue);
-            showContinueScreen();
-        }
-
-        else {
-            clearScreen();
-            System.out.println();
-            System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
-            System.out.println(
-                    "! INVALID DECIMAL NUMBER.\n" +
-                            "     Please enter a VALID Decimal Number.\n" +
-                            "     NOTE: Valid Decimal Numbers include - \n" +
-                            "          0, 1, 2, 3, 4, 5, 6, 7, 8, and 9.");
-            displayPressContinue();
+        if (decimalInput.isEmpty() || decimalInput.isBlank()) {
             validateDecimalInput();
+        } else {
+
+            for (int loop = 0; loop < decimalInput.length(); loop++) {
+                char character = decimalInput.charAt(loop);
+                if (character != '.' && (character < '0' || character > '9')) {
+                    validation = false;
+                    break;
+                }
+            }
+
+            int countDot = 0;
+            for (int loop = 0; loop < decimalInput.length(); loop++) {
+                char character = decimalInput.charAt(loop);
+                if (character == '.') {
+                    countDot++;
+                }
+            }
+            if (countDot > 1) {
+                validation = false;
+            }
+
+            if (validation) {
+                String[] section = decimalInput.split("\\.");
+                String integralSection = section[0];
+                String fractionalSection = section.length > 1 ? section[1] : "";
+
+                for (int loop = 0; loop < integralSection.length(); loop++) {
+                    char character = integralSection.charAt(loop);
+                    if (character < '0' || character > '9') {
+                        validation = false;
+                        break;
+                    }
+                }
+
+                for (int loop = 0; loop < fractionalSection.length(); loop++) {
+                    char character = fractionalSection.charAt(loop);
+                    if (character < '0' || character > '9') {
+                        validation = false;
+                        break;
+                    }
+                }
+            }
+
+            if (validation) {
+                double decimalValue = Double.parseDouble(decimalInput);
+                String binaryValue = convertDecimalToBinary(decimalValue);
+                String octalValue = convertDecimalToOctal(decimalValue);
+                String hexadecimalValue = convertDecimalToHexadecimal(decimalValue);
+
+                clearScreen();
+                System.out.println();
+                System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
+                System.out.println("VALIDATION SUCCESSFUL...");
+                System.out.println("Current Decimal Value: " + decimalInput);
+                displayConversion(binaryValue, octalValue, decimalValue + "", hexadecimalValue);
+                showContinueScreen();
+            } else {
+                clearScreen();
+                System.out.println();
+                System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
+                System.out.println(
+                        "! INVALID DECIMAL NUMBER.\n" +
+                                "     Please enter a VALID Decimal Number.\n" +
+                                "     NOTE: Valid Decimal Numbers include - \n" +
+                                "          0, 1, 2, 3, 4, 5, 6, 7, 8, and 9.");
+                displayPressContinue();
+                validateDecimalInput();
+            }
         }
     }
 
@@ -341,38 +349,13 @@ public class ConversionNumberSystem {
         String hexadecimalInput = scanner.nextLine();
         boolean validation = true;
 
-        for (int loop = 0; loop < hexadecimalInput.length(); loop++) {
-            char character = hexadecimalInput.charAt(loop);
-            if (character != '.' && !((character >= '0'
-                    && character <= '9')
-                    || (character >= 'A'
-                            && character <= 'F')
-                    || (character >= 'a'
-                            && character <= 'f'))) {
-                validation = false;
-                break;
-            }
-        }
+        if (hexadecimalInput.isEmpty() || hexadecimalInput.isBlank()) {
+            validateHexadecimalInput();
+        } else {
 
-        int countDot = 0;
-        for (int loop = 0; loop < hexadecimalInput.length(); loop++) {
-            char character = hexadecimalInput.charAt(loop);
-            if (character == '.') {
-                countDot++;
-            }
-        }
-        if (countDot > 1) {
-            validation = false;
-        }
-
-        if (validation) {
-            String[] section = hexadecimalInput.split("\\.");
-            String integralSection = section[0];
-            String fractionalSection = section.length > 1 ? section[1] : "";
-
-            for (int loop = 0; loop < integralSection.length(); loop++) {
-                char character = integralSection.charAt(loop);
-                if (!((character >= '0'
+            for (int loop = 0; loop < hexadecimalInput.length(); loop++) {
+                char character = hexadecimalInput.charAt(loop);
+                if (character != '.' && !((character >= '0'
                         && character <= '9')
                         || (character >= 'A'
                                 && character <= 'F')
@@ -383,46 +366,74 @@ public class ConversionNumberSystem {
                 }
             }
 
-            for (int i = 0; i < fractionalSection.length(); i++) {
-                char c = fractionalSection.charAt(i);
-                if (!((c >= '0'
-                        && c <= '9')
-                        || (c >= 'A'
-                                && c <= 'F')
-                        || (c >= 'a'
-                                && c <= 'f'))) {
-                    validation = false;
-                    break;
+            int countDot = 0;
+            for (int loop = 0; loop < hexadecimalInput.length(); loop++) {
+                char character = hexadecimalInput.charAt(loop);
+                if (character == '.') {
+                    countDot++;
                 }
             }
-        }
+            if (countDot > 1) {
+                validation = false;
+            }
 
-        if (validation) {
-            double decimalValue = convertHexadecimalToDecimal(hexadecimalInput);
-            String binaryValue = convertDecimalToBinary(decimalValue);
-            String octalValue = convertDecimalToOctal(decimalValue);
+            if (validation) {
+                String[] section = hexadecimalInput.split("\\.");
+                String integralSection = section[0];
+                String fractionalSection = section.length > 1 ? section[1] : "";
 
-            clearScreen();
-            System.out.println();
-            System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
-            System.out.println("VALIDATION SUCCESSFUL...");
-            System.out.println("Current Hexadecimal Value: " + hexadecimalInput);
-            displayConversion(binaryValue, octalValue, decimalValue + "", hexadecimalInput);
-            showContinueScreen();
-        }
+                for (int loop = 0; loop < integralSection.length(); loop++) {
+                    char character = integralSection.charAt(loop);
+                    if (!((character >= '0'
+                            && character <= '9')
+                            || (character >= 'A'
+                                    && character <= 'F')
+                            || (character >= 'a'
+                                    && character <= 'f'))) {
+                        validation = false;
+                        break;
+                    }
+                }
 
-        else {
-            clearScreen();
-            System.out.println();
-            System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
-            System.out.println(
-                    "! INVALID HEXADECIMAL NUMBER.\n" +
-                            "     Please enter a VALID Hexadecimal Number.\n" +
-                            "     NOTE: Valid Hexadecimal Numbers include - \n" +
-                            "          0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\n" +
-                            "          A, B, C, D, E, and F.");
-            displayPressContinue();
-            validateHexadecimalInput();
+                for (int i = 0; i < fractionalSection.length(); i++) {
+                    char c = fractionalSection.charAt(i);
+                    if (!((c >= '0'
+                            && c <= '9')
+                            || (c >= 'A'
+                                    && c <= 'F')
+                            || (c >= 'a'
+                                    && c <= 'f'))) {
+                        validation = false;
+                        break;
+                    }
+                }
+            }
+
+            if (validation) {
+                double decimalValue = convertHexadecimalToDecimal(hexadecimalInput);
+                String binaryValue = convertDecimalToBinary(decimalValue);
+                String octalValue = convertDecimalToOctal(decimalValue);
+
+                clearScreen();
+                System.out.println();
+                System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
+                System.out.println("VALIDATION SUCCESSFUL...");
+                System.out.println("Current Hexadecimal Value: " + hexadecimalInput);
+                displayConversion(binaryValue, octalValue, decimalValue + "", hexadecimalInput);
+                showContinueScreen();
+            } else {
+                clearScreen();
+                System.out.println();
+                System.out.println("+----------+ +----------+ +----------+ +----------+ +----------+");
+                System.out.println(
+                        "! INVALID HEXADECIMAL NUMBER.\n" +
+                                "     Please enter a VALID Hexadecimal Number.\n" +
+                                "     NOTE: Valid Hexadecimal Numbers include - \n" +
+                                "          0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\n" +
+                                "          A, B, C, D, E, and F.");
+                displayPressContinue();
+                validateHexadecimalInput();
+            }
         }
     }
 
@@ -521,9 +532,7 @@ public class ConversionNumberSystem {
                 if (product >= 1) {
                     binaryValue += "1";
                     fractionalSection = product - 1;
-                }
-
-                else {
+                } else {
                     binaryValue += "0";
                     fractionalSection = product;
                 }
